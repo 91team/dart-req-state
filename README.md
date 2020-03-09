@@ -133,3 +133,10 @@ samples, guidance on mobile development, and a full API reference.
     }
   }
 ```
+
+### Roadmap
+
+- Дописать доку
+- Widget тесты
+- Добавить примеры использования
+- Добавить расширения для `mobx`
