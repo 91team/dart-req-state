@@ -13,23 +13,44 @@ mixin _$TestScreenController on TestScreenControllerBase, Store {
       Atom(name: 'TestScreenControllerBase.isSwitcherEnabled');
 
   @override
-  bool get isSwitcherEnabled {
+  bool get metaIsSwitcherEnabled {
     _$isSwitcherEnabledAtom.context.enforceReadPolicy(_$isSwitcherEnabledAtom);
     _$isSwitcherEnabledAtom.reportObserved();
-    return super.isSwitcherEnabled;
+    return super.metaIsSwitcherEnabled;
   }
 
   @override
-  set isSwitcherEnabled(bool value) {
+  set metaIsSwitcherEnabled(bool value) {
     _$isSwitcherEnabledAtom.context.conditionallyRunInAction(() {
-      super.isSwitcherEnabled = value;
+      super.metaIsSwitcherEnabled = value;
       _$isSwitcherEnabledAtom.reportChanged();
     }, _$isSwitcherEnabledAtom, name: '${_$isSwitcherEnabledAtom.name}_set');
   }
 
+  final _$pullItemsAsyncAction = AsyncAction('pullItems');
+
+  @override
+  Future metaPullItems() {
+    return _$pullItemsAsyncAction.run(() => super.metaPullItems());
+  }
+
+  final _$TestScreenControllerBaseActionController =
+      ActionController(name: 'TestScreenControllerBase');
+
+  @override
+  dynamic _metaSetIsSwitcherEnabled() {
+    final _$actionInfo =
+        _$TestScreenControllerBaseActionController.startAction();
+    try {
+      return super._metaSetIsSwitcherEnabled();
+    } finally {
+      _$TestScreenControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
-    final string = 'isSwitcherEnabled: ${isSwitcherEnabled.toString()}';
+    final string = 'isSwitcherEnabled: ${metaIsSwitcherEnabled.toString()}';
     return '{$string}';
   }
 }
