@@ -32,7 +32,7 @@ void main() {
       reqState.swithStatusToFailed();
       expect(reqState.status, isA<ReqStateStatusFailed>());
 
-      reqState.swithStatusToSucceesed();
+      reqState.swithStatusToSucceeded();
       expect(reqState.status, isA<ReqStateStatusSucceeded>());
 
       reqState.swithStatusToIDLE();
@@ -67,7 +67,7 @@ void main() {
       expect(reqState.status, isA<ReqStateStatusPending>());
       expect(reqState.status.retrieveMeta<int>(), 1);
 
-      reqState.swithStatusToSucceesed<String>(withMeta: '1');
+      reqState.swithStatusToSucceeded<String>(withMeta: '1');
       expect(reqState.status, isA<ReqStateStatusSucceeded>());
       expect(reqState.status.retrieveMeta<String>(), '1');
 

@@ -27,7 +27,7 @@ class ReqState {
     try {
       swithStatusToPending();
       await execFn();
-      swithStatusToSucceesed();
+      swithStatusToSucceeded();
     } catch (e) {
       swithStatusToFailed();
       rethrow;
@@ -41,7 +41,7 @@ class ReqState {
     try {
       swithStatusToPending();
       await execFn();
-      swithStatusToSucceesed();
+      swithStatusToSucceeded();
     } catch (e) {
       swithStatusToFailed();
 
@@ -60,7 +60,7 @@ class ReqState {
       var successMeta = await execFn((TMeta meta) {
         swithStatusToPending(withMeta: meta);
       });
-      swithStatusToSucceesed(withMeta: successMeta);
+      swithStatusToSucceeded(withMeta: successMeta);
     } catch (e) {
       swithStatusToFailed(withMeta: e);
     }
@@ -75,7 +75,7 @@ class ReqState {
         swithStatusToPending<TMeta>(withMeta: withMeta);
         break;
       case ReqStateStatusKey.SUCCEEDED:
-        swithStatusToSucceesed<TMeta>(withMeta: withMeta);
+        swithStatusToSucceeded<TMeta>(withMeta: withMeta);
         break;
       case ReqStateStatusKey.FAILED:
         swithStatusToFailed<TMeta>(withMeta: withMeta);
@@ -96,7 +96,7 @@ class ReqState {
     _switchToStatus(status: ReqStateStatusPending<TMeta>(meta: withMeta));
   }
 
-  void swithStatusToSucceesed<TMeta>({TMeta withMeta}) {
+  void swithStatusToSucceeded<TMeta>({TMeta withMeta}) {
     _switchToStatus(status: ReqStateStatusSucceeded(meta: withMeta));
   }
 
