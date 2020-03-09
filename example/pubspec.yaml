@@ -14,11 +14,14 @@ description: Example for dart_req_state.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  auto_route: ^0.3.0
+  flutter_mobx: ^1.0.1
+  mobx: ^1.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -27,6 +30,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  auto_route_generator: ^0.3.0
+  build_runner: ^1.7.3
   mobx_codegen: ^1.0.2
   pedantic91:
     git: https://github.com/ninenone/pedantic91.git
