@@ -27,18 +27,18 @@ samples, guidance on mobile development, and a full API reference.
 
 ##### Описание
 
-Еcли где-то произошла ошибка, то этот метод выкинет ее наруже через `rethrow`
+Если где-то произошла ошибка, то этот метод выкинет ее наружу через `rethrow`
 
 ##### Код метода
 
 ```dart
   Future<void> executeWithRethrowOnFail(ExecFn execFn) async {
     try {
-      swithStatusToPending();
+      switchStatusToPending();
       await execFn();
-      swithStatusToSucceesed();
+      switchStatusToSucceeded();
     } catch (e) {
-      swithStatusToFailed();
+      switchStatusToFailed();
       rethrow;
     }
   }
@@ -71,11 +71,11 @@ samples, guidance on mobile development, and a full API reference.
     Function(Exception) onFailed,
   }) async {
     try {
-      swithStatusToPending();
+      switchStatusToPending();
       await execFn();
-      swithStatusToSucceesed();
+      switchStatusToSucceeded();
     } catch (e) {
-      swithStatusToFailed();
+      switchStatusToFailed();
 
       if (onFailed != null) {
         onFailed(e);
@@ -118,18 +118,18 @@ samples, guidance on mobile development, and a full API reference.
   }) async {
     try {
       // (3)
-      swithStatusToPending(withMeta: withInitialPendingMeta);
+      switchStatusToPending(withMeta: withInitialPendingMeta);
 
       var successMeta = await execFn(/*(4)*/(TMeta meta) {
         // (4)
-        swithStatusToPending(withMeta: meta);
+        switchStatusToPending(withMeta: meta);
       });
 
       // Результат функции execFn отправляется в статус (2)
-      swithStatusToSucceeded(withMeta: successMeta);
+      switchStatusToSucceeded(withMeta: successMeta);
     } catch (e) {
       // Ошибка отправляется как мета инфа в статус (1)
-      swithStatusToFailed(withMeta: e);
+      switchStatusToFailed(withMeta: e);
     }
   }
 ```

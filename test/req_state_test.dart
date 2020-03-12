@@ -25,17 +25,17 @@ void main() {
   });
 
   group('Switch status', () {
-    test('.swithStatusTo', () {
-      reqState.swithStatusToPending();
+    test('.switchStatusTo', () {
+      reqState.switchStatusToPending();
       expect(reqState.status, isA<ReqStateStatusPending>());
 
-      reqState.swithStatusToFailed();
+      reqState.switchStatusToFailed();
       expect(reqState.status, isA<ReqStateStatusFailed>());
 
-      reqState.swithStatusToSucceeded();
+      reqState.switchStatusToSucceeded();
       expect(reqState.status, isA<ReqStateStatusSucceeded>());
 
-      reqState.swithStatusToIDLE();
+      reqState.switchStatusToIDLE();
       expect(reqState.status, isA<ReqStateStatusIDLE>());
     });
 
@@ -63,22 +63,21 @@ void main() {
 
   group('Switch status with meta', () {
     test('.swithStatusTo', () {
-      reqState.swithStatusToPending<int>(withMeta: 1);
+      reqState.switchStatusToPending<int>(withMeta: 1);
       expect(reqState.status, isA<ReqStateStatusPending>());
       expect(reqState.status.retrieveMeta<int>(), 1);
 
-      reqState.swithStatusToSucceeded<String>(withMeta: '1');
+      reqState.switchStatusToSucceeded<String>(withMeta: '1');
       expect(reqState.status, isA<ReqStateStatusSucceeded>());
       expect(reqState.status.retrieveMeta<String>(), '1');
 
-      reqState.swithStatusToFailed<ReqState>(withMeta: ReqState());
+      reqState.switchStatusToFailed<ReqState>(withMeta: ReqState());
       expect(reqState.status, isA<ReqStateStatusFailed>());
       expect(reqState.status.retrieveMeta<ReqState>(), isA<ReqState>());
     });
 
     test('.switchStatusByKey', () {
-      reqState.switchStatusByKey<int>(
-          to: ReqStateStatusKey.PENDING, withMeta: 1);
+      reqState.switchStatusByKey<int>(to: ReqStateStatusKey.PENDING, withMeta: 1);
       expect(reqState.status, isA<ReqStateStatusPending>());
       expect(reqState.status.retrieveMeta<int>(), 1);
 
@@ -98,8 +97,7 @@ void main() {
     });
 
     test('.resetStatus', () {
-      reqState.switchStatusByKey<int>(
-          to: ReqStateStatusKey.PENDING, withMeta: 1);
+      reqState.switchStatusByKey<int>(to: ReqStateStatusKey.PENDING, withMeta: 1);
       expect(reqState.status, isA<ReqStateStatusPending>());
       expect(reqState.status.retrieveMeta<int>(), equals(1));
 

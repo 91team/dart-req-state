@@ -25,11 +25,11 @@ class ReqState {
 
   Future<void> executeWithRethrowOnFail(ExecFn execFn) async {
     try {
-      swithStatusToPending();
+      switchStatusToPending();
       await execFn();
-      swithStatusToSucceeded();
+      switchStatusToSucceeded();
     } catch (e) {
-      swithStatusToFailed();
+      switchStatusToFailed();
       rethrow;
     }
   }
@@ -39,11 +39,11 @@ class ReqState {
     Function(Exception) onFailed,
   }) async {
     try {
-      swithStatusToPending();
+      switchStatusToPending();
       await execFn();
-      swithStatusToSucceeded();
+      switchStatusToSucceeded();
     } catch (e) {
-      swithStatusToFailed();
+      switchStatusToFailed();
 
       if (onFailed != null) {
         onFailed(e);
@@ -56,13 +56,13 @@ class ReqState {
     TMeta withInitialPendingMeta,
   }) async {
     try {
-      swithStatusToPending(withMeta: withInitialPendingMeta);
+      switchStatusToPending(withMeta: withInitialPendingMeta);
       var successMeta = await execFn((TMeta meta) {
-        swithStatusToPending(withMeta: meta);
+        switchStatusToPending(withMeta: meta);
       });
-      swithStatusToSucceeded(withMeta: successMeta);
+      switchStatusToSucceeded(withMeta: successMeta);
     } catch (e) {
-      swithStatusToFailed(withMeta: e);
+      switchStatusToFailed(withMeta: e);
     }
   }
 
@@ -72,35 +72,35 @@ class ReqState {
   }) {
     switch (to) {
       case ReqStateStatusKey.PENDING:
-        swithStatusToPending<TMeta>(withMeta: withMeta);
+        switchStatusToPending<TMeta>(withMeta: withMeta);
         break;
       case ReqStateStatusKey.SUCCEEDED:
-        swithStatusToSucceeded<TMeta>(withMeta: withMeta);
+        switchStatusToSucceeded<TMeta>(withMeta: withMeta);
         break;
       case ReqStateStatusKey.FAILED:
-        swithStatusToFailed<TMeta>(withMeta: withMeta);
+        switchStatusToFailed<TMeta>(withMeta: withMeta);
         break;
       case ReqStateStatusKey.IDLE:
-        swithStatusToIDLE<TMeta>(withMeta: withMeta);
+        switchStatusToIDLE<TMeta>(withMeta: withMeta);
         break;
       default:
         throw Exception('Got unexpected status $to');
     }
   }
 
-  void swithStatusToIDLE<TMeta>({TMeta withMeta}) {
+  void switchStatusToIDLE<TMeta>({TMeta withMeta}) {
     _switchToStatus(status: ReqStateStatusIDLE(meta: withMeta));
   }
 
-  void swithStatusToPending<TMeta>({TMeta withMeta}) {
+  void switchStatusToPending<TMeta>({TMeta withMeta}) {
     _switchToStatus(status: ReqStateStatusPending<TMeta>(meta: withMeta));
   }
 
-  void swithStatusToSucceeded<TMeta>({TMeta withMeta}) {
+  void switchStatusToSucceeded<TMeta>({TMeta withMeta}) {
     _switchToStatus(status: ReqStateStatusSucceeded(meta: withMeta));
   }
 
-  void swithStatusToFailed<TMeta>({TMeta withMeta}) {
+  void switchStatusToFailed<TMeta>({TMeta withMeta}) {
     _switchToStatus(status: ReqStateStatusFailed(meta: withMeta));
   }
 
