@@ -9,13 +9,11 @@ part of 'controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$TestScreenController on TestScreenControllerBase, Store {
-  final _$metaIsSwitcherEnabledAtom =
-      Atom(name: 'TestScreenControllerBase.metaIsSwitcherEnabled');
+  final _$metaIsSwitcherEnabledAtom = Atom(name: 'TestScreenControllerBase.metaIsSwitcherEnabled');
 
   @override
   bool get metaIsSwitcherEnabled {
-    _$metaIsSwitcherEnabledAtom.context
-        .enforceReadPolicy(_$metaIsSwitcherEnabledAtom);
+    _$metaIsSwitcherEnabledAtom.context.enforceReadPolicy(_$metaIsSwitcherEnabledAtom);
     _$metaIsSwitcherEnabledAtom.reportObserved();
     return super.metaIsSwitcherEnabled;
   }
@@ -25,28 +23,24 @@ mixin _$TestScreenController on TestScreenControllerBase, Store {
     _$metaIsSwitcherEnabledAtom.context.conditionallyRunInAction(() {
       super.metaIsSwitcherEnabled = value;
       _$metaIsSwitcherEnabledAtom.reportChanged();
-    }, _$metaIsSwitcherEnabledAtom,
-        name: '${_$metaIsSwitcherEnabledAtom.name}_set');
+    }, _$metaIsSwitcherEnabledAtom, name: '${_$metaIsSwitcherEnabledAtom.name}_set');
   }
 
-  final _$simpleIsSwitcherEnabledAtom =
-      Atom(name: 'TestScreenControllerBase.simpleIsSwitcherEnabled');
+  final _$simpleIsSwitcherEnabledAtom = Atom(name: 'TestScreenControllerBase.simpleIsSwitcherEnabled');
 
   @override
-  bool get simpleIsSwitcherEnabled {
-    _$simpleIsSwitcherEnabledAtom.context
-        .enforceReadPolicy(_$simpleIsSwitcherEnabledAtom);
+  bool get mobxSimpleIsSwitcherEnabled {
+    _$simpleIsSwitcherEnabledAtom.context.enforceReadPolicy(_$simpleIsSwitcherEnabledAtom);
     _$simpleIsSwitcherEnabledAtom.reportObserved();
-    return super.simpleIsSwitcherEnabled;
+    return super.mobxSimpleIsSwitcherEnabled;
   }
 
   @override
-  set simpleIsSwitcherEnabled(bool value) {
+  set mobxSimpleIsSwitcherEnabled(bool value) {
     _$simpleIsSwitcherEnabledAtom.context.conditionallyRunInAction(() {
-      super.simpleIsSwitcherEnabled = value;
+      super.mobxSimpleIsSwitcherEnabled = value;
       _$simpleIsSwitcherEnabledAtom.reportChanged();
-    }, _$simpleIsSwitcherEnabledAtom,
-        name: '${_$simpleIsSwitcherEnabledAtom.name}_set');
+    }, _$simpleIsSwitcherEnabledAtom, name: '${_$simpleIsSwitcherEnabledAtom.name}_set');
   }
 
   final _$metaPullItemsAsyncAction = AsyncAction('metaPullItems');
@@ -63,13 +57,11 @@ mixin _$TestScreenController on TestScreenControllerBase, Store {
     return _$simplePullItemsAsyncAction.run(() => super.simplePullItems());
   }
 
-  final _$TestScreenControllerBaseActionController =
-      ActionController(name: 'TestScreenControllerBase');
+  final _$TestScreenControllerBaseActionController = ActionController(name: 'TestScreenControllerBase');
 
   @override
   dynamic _metaSetIsSwitcherEnabled() {
-    final _$actionInfo =
-        _$TestScreenControllerBaseActionController.startAction();
+    final _$actionInfo = _$TestScreenControllerBaseActionController.startAction();
     try {
       return super._metaSetIsSwitcherEnabled();
     } finally {
@@ -79,8 +71,7 @@ mixin _$TestScreenController on TestScreenControllerBase, Store {
 
   @override
   dynamic _simpleSetIsSwitcherEnabled() {
-    final _$actionInfo =
-        _$TestScreenControllerBaseActionController.startAction();
+    final _$actionInfo = _$TestScreenControllerBaseActionController.startAction();
     try {
       return super._simpleSetIsSwitcherEnabled();
     } finally {
@@ -91,7 +82,7 @@ mixin _$TestScreenController on TestScreenControllerBase, Store {
   @override
   String toString() {
     final string =
-        'metaIsSwitcherEnabled: ${metaIsSwitcherEnabled.toString()},simpleIsSwitcherEnabled: ${simpleIsSwitcherEnabled.toString()}';
+        'metaIsSwitcherEnabled: ${metaIsSwitcherEnabled.toString()},simpleIsSwitcherEnabled: ${mobxSimpleIsSwitcherEnabled.toString()}';
     return '{$string}';
   }
 }

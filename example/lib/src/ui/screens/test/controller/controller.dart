@@ -13,6 +13,7 @@ abstract class TestScreenControllerBase with Store {
   bool metaIsSwitcherEnabled = false;
 
   @observable
+  bool mobxSimpleIsSwitcherEnabled = false;
   bool simpleIsSwitcherEnabled = false;
 
   TestScreenControllerBase() : metaIsSwitcherEnabled = false;
@@ -54,9 +55,10 @@ abstract class TestScreenControllerBase with Store {
   simplePullItems() async {
     await simpleReqState.executeWithCallbackOnFail(() async {
       await Future.delayed(Duration(milliseconds: 1000));
-      runInAction(() {
-        simpleIsSwitcherEnabled = !simpleIsSwitcherEnabled;
-      });
+      simpleIsSwitcherEnabled = !simpleIsSwitcherEnabled;
+      // runInAction(() {
+      //   mobxSimpleIsSwitcherEnabled = !mobxSimpleIsSwitcherEnabled;
+      // });
     });
   }
 
@@ -67,7 +69,7 @@ abstract class TestScreenControllerBase with Store {
 
   @action
   _simpleSetIsSwitcherEnabled() {
-    simpleIsSwitcherEnabled = !simpleIsSwitcherEnabled;
+    mobxSimpleIsSwitcherEnabled = !mobxSimpleIsSwitcherEnabled;
   }
 
   void init() {}
