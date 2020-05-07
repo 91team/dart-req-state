@@ -1,29 +1,31 @@
 import 'package:flutter/widgets.dart';
 
-import 'req_state.dart';
-import 'req_state_statuses.dart';
+import '../req_state.dart';
+import '../req_state_statuses.dart';
 
-typedef Tlistener<T extends ReqStateStatus> = Widget Function(
+typedef Tlistener = Widget Function(
   BuildContext context, {
-  @required T status,
+  @required ReqStateStatus status,
 });
 
 class ReqStateSwitcher extends StatelessWidget {
   final Widget _defaultWidget;
   final ReqState _reqState;
 
-  final Tlistener<ReqStateStatusIDLE> onIDLE;
-  final Tlistener<ReqStateStatusPending> onPending;
-  final Tlistener<ReqStateStatusSucceeded> onSucceeded;
-  final Tlistener<ReqStateStatusFailed> onFailed;
+  final Tlistener onIDLE;
+  final Tlistener onPending;
+  final Tlistener onSucceeded;
+  final Tlistener onFailed;
+  final Tlistener onCancelled;
 
-  const ReqStateSwitcher(
+  ReqStateSwitcher(
     ReqState reqState, {
     Key key,
     this.onIDLE,
     this.onPending,
     this.onSucceeded,
     this.onFailed,
+    this.onCancelled,
   })  : _defaultWidget = const SizedBox.shrink(),
         _reqState = reqState,
         super(key: key);
@@ -37,29 +39,36 @@ class ReqStateSwitcher extends StatelessWidget {
         BuildContext streamBuilderContext,
         AsyncSnapshot<ReqStateStatus> snapshot,
       ) {
+        if (snapshot.data is ReqStateStatusCancelled) {
+          return _runListener(
+            context: context,
+            listener: onCancelled,
+          );
+        }
+
         if (snapshot.data is ReqStateStatusIDLE) {
-          return _runListener<ReqStateStatusIDLE>(
+          return _runListener(
             context: context,
             listener: onIDLE,
           );
         }
 
         if (snapshot.data is ReqStateStatusPending) {
-          return _runListener<ReqStateStatusPending>(
+          return _runListener(
             context: context,
             listener: onPending,
           );
         }
 
         if (snapshot.data is ReqStateStatusSucceeded) {
-          return _runListener<ReqStateStatusSucceeded>(
+          return _runListener(
             context: context,
             listener: onSucceeded,
           );
         }
 
         if (snapshot.data is ReqStateStatusFailed) {
-          return _runListener<ReqStateStatusFailed>(
+          return _runListener(
             context: context,
             listener: onFailed,
           );
@@ -70,9 +79,9 @@ class ReqStateSwitcher extends StatelessWidget {
     );
   }
 
-  Widget _runListener<TL extends ReqStateStatus>({
+  Widget _runListener({
     BuildContext context,
-    Tlistener<TL> listener,
+    Tlistener listener,
   }) {
     return listener != null ? listener(context, status: _reqState.status) : _defaultWidget;
   }

@@ -5,10 +5,7 @@ enum ReqStateStatusKey {
   PENDING,
   SUCCEEDED,
   FAILED,
-  NOT_IDLE,
-  NOT_PENDING,
-  NOT_SUCCEEDED,
-  NOT_FAILED,
+  CANCELLED,
 }
 
 extension SerializableStatus on ReqStateStatusKey {
@@ -40,7 +37,6 @@ abstract class ReqStateStatus {
   bool checkMetaTypeIs<TCheck>() => _meta is TCheck;
 }
 
-// IDLE
 class ReqStateStatusIDLE<TMeta> extends ReqStateStatus {
   ReqStateStatusIDLE({TMeta meta})
       : super(
@@ -49,15 +45,6 @@ class ReqStateStatusIDLE<TMeta> extends ReqStateStatus {
         );
 }
 
-class ReqStateStatusNotIDLE<TMeta> extends ReqStateStatus {
-  ReqStateStatusNotIDLE({TMeta meta})
-      : super(
-          key: ReqStateStatusKey.IDLE,
-          meta: meta,
-        );
-}
-
-// PENDING
 class ReqStateStatusPending<TMeta> extends ReqStateStatus {
   ReqStateStatusPending({TMeta meta})
       : super(
@@ -66,15 +53,6 @@ class ReqStateStatusPending<TMeta> extends ReqStateStatus {
         );
 }
 
-class ReqStateStatusNotPending<TMeta> extends ReqStateStatus {
-  ReqStateStatusNotPending({TMeta meta})
-      : super(
-          key: ReqStateStatusKey.PENDING,
-          meta: meta,
-        );
-}
-
-// SUCCEEDED
 class ReqStateStatusSucceeded<TMeta> extends ReqStateStatus {
   ReqStateStatusSucceeded({TMeta meta})
       : super(
@@ -83,15 +61,6 @@ class ReqStateStatusSucceeded<TMeta> extends ReqStateStatus {
         );
 }
 
-class ReqStateStatusNotSucceeded<TMeta> extends ReqStateStatus {
-  ReqStateStatusNotSucceeded({TMeta meta})
-      : super(
-          key: ReqStateStatusKey.SUCCEEDED,
-          meta: meta,
-        );
-}
-
-// FAILED
 class ReqStateStatusFailed<TMeta> extends ReqStateStatus {
   ReqStateStatusFailed({TMeta meta})
       : super(
@@ -100,10 +69,10 @@ class ReqStateStatusFailed<TMeta> extends ReqStateStatus {
         );
 }
 
-class ReqStateStatusNotFailed<TMeta> extends ReqStateStatus {
-  ReqStateStatusNotFailed({TMeta meta})
+class ReqStateStatusCancelled<TMeta> extends ReqStateStatus {
+  ReqStateStatusCancelled({TMeta meta})
       : super(
-          key: ReqStateStatusKey.FAILED,
+          key: ReqStateStatusKey.CANCELLED,
           meta: meta,
         );
 }

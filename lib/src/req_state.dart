@@ -104,6 +104,10 @@ class ReqState {
     _switchToStatus(status: ReqStateStatusFailed(meta: withMeta));
   }
 
+  void switchStatusToCancelled<TMeta>({TMeta withMeta}) {
+    _switchToStatus(status: ReqStateStatusCancelled(meta: withMeta));
+  }
+
   void _switchToStatus({ReqStateStatus status}) {
     _currentStatus = status;
     _controller.add(_currentStatus);
