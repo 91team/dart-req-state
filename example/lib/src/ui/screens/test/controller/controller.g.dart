@@ -9,29 +9,58 @@ part of 'controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$TestScreenController on TestScreenControllerBase, Store {
-  final _$isSwitcherEnabledAtom =
-      Atom(name: 'TestScreenControllerBase.isSwitcherEnabled');
+  final _$metaIsSwitcherEnabledAtom =
+      Atom(name: 'TestScreenControllerBase.metaIsSwitcherEnabled');
 
   @override
   bool get metaIsSwitcherEnabled {
-    _$isSwitcherEnabledAtom.context.enforceReadPolicy(_$isSwitcherEnabledAtom);
-    _$isSwitcherEnabledAtom.reportObserved();
+    _$metaIsSwitcherEnabledAtom.context
+        .enforceReadPolicy(_$metaIsSwitcherEnabledAtom);
+    _$metaIsSwitcherEnabledAtom.reportObserved();
     return super.metaIsSwitcherEnabled;
   }
 
   @override
   set metaIsSwitcherEnabled(bool value) {
-    _$isSwitcherEnabledAtom.context.conditionallyRunInAction(() {
+    _$metaIsSwitcherEnabledAtom.context.conditionallyRunInAction(() {
       super.metaIsSwitcherEnabled = value;
-      _$isSwitcherEnabledAtom.reportChanged();
-    }, _$isSwitcherEnabledAtom, name: '${_$isSwitcherEnabledAtom.name}_set');
+      _$metaIsSwitcherEnabledAtom.reportChanged();
+    }, _$metaIsSwitcherEnabledAtom,
+        name: '${_$metaIsSwitcherEnabledAtom.name}_set');
   }
 
-  final _$pullItemsAsyncAction = AsyncAction('pullItems');
+  final _$simpleIsSwitcherEnabledAtom =
+      Atom(name: 'TestScreenControllerBase.simpleIsSwitcherEnabled');
+
+  @override
+  bool get simpleIsSwitcherEnabled {
+    _$simpleIsSwitcherEnabledAtom.context
+        .enforceReadPolicy(_$simpleIsSwitcherEnabledAtom);
+    _$simpleIsSwitcherEnabledAtom.reportObserved();
+    return super.simpleIsSwitcherEnabled;
+  }
+
+  @override
+  set simpleIsSwitcherEnabled(bool value) {
+    _$simpleIsSwitcherEnabledAtom.context.conditionallyRunInAction(() {
+      super.simpleIsSwitcherEnabled = value;
+      _$simpleIsSwitcherEnabledAtom.reportChanged();
+    }, _$simpleIsSwitcherEnabledAtom,
+        name: '${_$simpleIsSwitcherEnabledAtom.name}_set');
+  }
+
+  final _$metaPullItemsAsyncAction = AsyncAction('metaPullItems');
 
   @override
   Future metaPullItems() {
-    return _$pullItemsAsyncAction.run(() => super.metaPullItems());
+    return _$metaPullItemsAsyncAction.run(() => super.metaPullItems());
+  }
+
+  final _$simplePullItemsAsyncAction = AsyncAction('simplePullItems');
+
+  @override
+  Future simplePullItems() {
+    return _$simplePullItemsAsyncAction.run(() => super.simplePullItems());
   }
 
   final _$TestScreenControllerBaseActionController =
@@ -49,8 +78,20 @@ mixin _$TestScreenController on TestScreenControllerBase, Store {
   }
 
   @override
+  dynamic _simpleSetIsSwitcherEnabled() {
+    final _$actionInfo =
+        _$TestScreenControllerBaseActionController.startAction();
+    try {
+      return super._simpleSetIsSwitcherEnabled();
+    } finally {
+      _$TestScreenControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
-    final string = 'isSwitcherEnabled: ${metaIsSwitcherEnabled.toString()}';
+    final string =
+        'metaIsSwitcherEnabled: ${metaIsSwitcherEnabled.toString()},simpleIsSwitcherEnabled: ${simpleIsSwitcherEnabled.toString()}';
     return '{$string}';
   }
 }

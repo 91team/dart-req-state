@@ -3,8 +3,7 @@ import 'package:mobx/mobx.dart';
 
 part 'controller.g.dart';
 
-class TestScreenController = TestScreenControllerBase
-    with _$TestScreenController;
+class TestScreenController = TestScreenControllerBase with _$TestScreenController;
 
 abstract class TestScreenControllerBase with Store {
   final metaReqState = ReqState();
@@ -55,6 +54,9 @@ abstract class TestScreenControllerBase with Store {
   simplePullItems() async {
     await simpleReqState.executeWithCallbackOnFail(() async {
       await Future.delayed(Duration(milliseconds: 1000));
+      runInAction(() {
+        simpleIsSwitcherEnabled = !simpleIsSwitcherEnabled;
+      });
     });
   }
 
