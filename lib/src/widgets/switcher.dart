@@ -3,20 +3,20 @@ import 'package:flutter/widgets.dart';
 import '../req_state.dart';
 import '../req_state_statuses.dart';
 
-typedef _THandler = Widget Function(
+typedef _THandler<T extends ReqStateStatus> = Widget Function(
   BuildContext context, {
-  @required ReqStateStatus status,
+  @required T status,
 });
 
 class ReqStateSwitcher extends StatelessWidget {
   final Widget _defaultWidget;
   final ReqState _reqState;
 
-  final _THandler onIDLE;
-  final _THandler onPending;
-  final _THandler onSucceeded;
-  final _THandler onFailed;
-  final _THandler onCancelled;
+  final _THandler<ReqStateStatusIDLE> onIDLE;
+  final _THandler<ReqStateStatusPending> onPending;
+  final _THandler<ReqStateStatusSucceeded> onSucceeded;
+  final _THandler<ReqStateStatusFailed> onFailed;
+  final _THandler<ReqStateStatusCancelled> onCancelled;
   final _THandler onOther;
 
   ReqStateSwitcher(
@@ -42,35 +42,35 @@ class ReqStateSwitcher extends StatelessWidget {
         AsyncSnapshot<ReqStateStatus> snapshot,
       ) {
         if (snapshot.data is ReqStateStatusIDLE && onIDLE != null) {
-          return _execHandler(
+          return _execHandler<ReqStateStatusIDLE>(
             context: context,
             handler: onIDLE,
           );
         }
 
         if (snapshot.data is ReqStateStatusPending && onPending != null) {
-          return _execHandler(
+          return _execHandler<ReqStateStatusPending>(
             context: context,
             handler: onPending,
           );
         }
 
         if (snapshot.data is ReqStateStatusSucceeded && onSucceeded != null) {
-          return _execHandler(
+          return _execHandler<ReqStateStatusSucceeded>(
             context: context,
             handler: onSucceeded,
           );
         }
 
         if (snapshot.data is ReqStateStatusFailed && onFailed != null) {
-          return _execHandler(
+          return _execHandler<ReqStateStatusFailed>(
             context: context,
             handler: onFailed,
           );
         }
 
         if (snapshot.data is ReqStateStatusCancelled && onCancelled != null) {
-          return _execHandler(
+          return _execHandler<ReqStateStatusCancelled>(
             context: context,
             handler: onCancelled,
           );
@@ -84,9 +84,9 @@ class ReqStateSwitcher extends StatelessWidget {
     );
   }
 
-  Widget _execHandler({
+  Widget _execHandler<T extends ReqStateStatus>({
     BuildContext context,
-    _THandler handler,
+    _THandler<T> handler,
   }) {
     return handler != null ? handler(context, status: _reqState.status) : _defaultWidget;
   }

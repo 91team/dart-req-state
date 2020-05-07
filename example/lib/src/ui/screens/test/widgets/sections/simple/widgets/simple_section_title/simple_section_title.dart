@@ -10,27 +10,28 @@ class SimpleSectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     // return ReqStateCondition<ReqStateStatusSucceeded>(
     //   context.provide<TestScreenController>().simpleReqState,
-    //   onIf: _buildOnIfSucceeded,
-    //   onElse: _buildOnElseSucceeded,
+    //   onTrue: _buildIfSucceeded,
+    //   onFalse: _buildElse,
     // );
 
     return ReqStateSwitcher(
       context.provide<TestScreenController>().simpleReqState,
-      onSucceeded: _buildOnIfSucceeded,
-      onPending: _buildOnElseSucceeded,
+      onSucceeded: _buildIfSucceeded,
+      onPending: _buildElse,
       // onFailed: _buildOnElseIdle,
       // onSucceeded: _buildOnElseIdle,
-      onOther: _buildOnElseSucceeded,
+      onOther: _buildElse,
     );
   }
 
-  Widget _buildOnIfSucceeded(BuildContext context, {ReqStateStatus status}) {
+  Widget _buildIfSucceeded(BuildContext context, {ReqStateStatusSucceeded status}) {
     return Text(
-      context.provide<TestScreenController>().simpleReqState.status.toString(),
+      context.provide<TestScreenController>().simpleReqState.status.toString() +
+          context.provide<TestScreenController>().simpleReqState.status.toString(),
     );
   }
 
-  Widget _buildOnElseSucceeded(BuildContext context, {ReqStateStatus status}) {
-    return Text("${status.toString()}");
+  Widget _buildElse(BuildContext context, {ReqStateStatus status}) {
+    return Text("${status.toString()}" + "${status.toString()}" + "${status.toString()}");
   }
 }

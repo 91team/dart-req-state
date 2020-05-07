@@ -3,23 +3,23 @@ import 'package:flutter/widgets.dart';
 import '../req_state.dart';
 import '../req_state_statuses.dart';
 
-typedef _THandler = Widget Function(
+typedef _THandler<T extends ReqStateStatus> = Widget Function(
   BuildContext context, {
-  @required ReqStateStatus status,
+  @required T status,
 });
 
-class ReqStateCondition<TIF> extends StatelessWidget {
+class ReqStateCondition<TOnTrue extends ReqStateStatus> extends StatelessWidget {
   final Widget _defaultWidget;
   final ReqState _reqState;
 
-  final _THandler onIf;
-  final _THandler onElse;
+  final _THandler<TOnTrue> onTrue;
+  final _THandler onFalse;
 
   const ReqStateCondition(
     ReqState reqState, {
     Key key,
-    this.onIf,
-    this.onElse,
+    this.onTrue,
+    this.onFalse,
   })  : _defaultWidget = const SizedBox.shrink(),
         _reqState = reqState,
         super(key: key);
@@ -33,17 +33,17 @@ class ReqStateCondition<TIF> extends StatelessWidget {
         BuildContext streamBuilderContext,
         AsyncSnapshot<ReqStateStatus> snapshot,
       ) {
-        if (snapshot.data is TIF && onIf != null) {
-          return _execHandler(
+        if (snapshot.data is TOnTrue && onTrue != null) {
+          return _execHandler<TOnTrue>(
             context: context,
-            handler: onIf,
+            handler: onTrue,
           );
         }
 
-        if (onElse != null) {
+        if (onFalse != null) {
           return _execHandler(
             context: context,
-            handler: onIf,
+            handler: onFalse,
           );
         }
 
@@ -52,9 +52,9 @@ class ReqStateCondition<TIF> extends StatelessWidget {
     );
   }
 
-  Widget _execHandler({
+  Widget _execHandler<T extends ReqStateStatus>({
     BuildContext context,
-    _THandler handler,
+    _THandler<T> handler,
   }) {
     return handler != null ? handler(context, status: _reqState.status) : _defaultWidget;
   }
