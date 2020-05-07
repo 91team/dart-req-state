@@ -33,17 +33,17 @@ class ReqStateCondition<TIF> extends StatelessWidget {
         BuildContext streamBuilderContext,
         AsyncSnapshot<ReqStateStatus> snapshot,
       ) {
-        if (snapshot.data is TIF) {
+        if (snapshot.data is TIF && onIf != null) {
           return _execHandler(
             context: context,
-            listener: onIf,
+            handler: onIf,
           );
         }
 
         if (onElse != null) {
           return _execHandler(
             context: context,
-            listener: onIf,
+            handler: onIf,
           );
         }
 
@@ -54,8 +54,8 @@ class ReqStateCondition<TIF> extends StatelessWidget {
 
   Widget _execHandler({
     BuildContext context,
-    _THandler listener,
+    _THandler handler,
   }) {
-    return listener != null ? listener(context, status: _reqState.status) : _defaultWidget;
+    return handler != null ? handler(context, status: _reqState.status) : _defaultWidget;
   }
 }

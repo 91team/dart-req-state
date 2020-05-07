@@ -71,6 +71,9 @@ class ReqState {
     TMeta withMeta,
   }) {
     switch (to) {
+      case ReqStateStatusKey.IDLE:
+        switchStatusToIDLE<TMeta>(withMeta: withMeta);
+        break;
       case ReqStateStatusKey.PENDING:
         switchStatusToPending<TMeta>(withMeta: withMeta);
         break;
@@ -80,8 +83,8 @@ class ReqState {
       case ReqStateStatusKey.FAILED:
         switchStatusToFailed<TMeta>(withMeta: withMeta);
         break;
-      case ReqStateStatusKey.IDLE:
-        switchStatusToIDLE<TMeta>(withMeta: withMeta);
+      case ReqStateStatusKey.CANCELLED:
+        switchStatusToCancelled<TMeta>(withMeta: withMeta);
         break;
       default:
         throw Exception('Got unexpected status $to');

@@ -41,44 +41,44 @@ class ReqStateSwitcher extends StatelessWidget {
         BuildContext streamBuilderContext,
         AsyncSnapshot<ReqStateStatus> snapshot,
       ) {
-        if (snapshot.data is ReqStateStatusCancelled) {
+        if (snapshot.data is ReqStateStatusIDLE && onIDLE != null) {
           return _execHandler(
             context: context,
-            listener: onCancelled,
+            handler: onIDLE,
           );
         }
 
-        if (snapshot.data is ReqStateStatusIDLE) {
+        if (snapshot.data is ReqStateStatusPending && onPending != null) {
           return _execHandler(
             context: context,
-            listener: onIDLE,
+            handler: onPending,
           );
         }
 
-        if (snapshot.data is ReqStateStatusPending) {
+        if (snapshot.data is ReqStateStatusSucceeded && onSucceeded != null) {
           return _execHandler(
             context: context,
-            listener: onPending,
+            handler: onSucceeded,
           );
         }
 
-        if (snapshot.data is ReqStateStatusSucceeded) {
+        if (snapshot.data is ReqStateStatusFailed && onFailed != null) {
           return _execHandler(
             context: context,
-            listener: onSucceeded,
+            handler: onFailed,
           );
         }
 
-        if (snapshot.data is ReqStateStatusFailed) {
+        if (snapshot.data is ReqStateStatusCancelled && onCancelled != null) {
           return _execHandler(
             context: context,
-            listener: onFailed,
+            handler: onCancelled,
           );
         }
 
         return _execHandler(
           context: context,
-          listener: onOther,
+          handler: onOther,
         );
       },
     );
@@ -86,8 +86,8 @@ class ReqStateSwitcher extends StatelessWidget {
 
   Widget _execHandler({
     BuildContext context,
-    _THandler listener,
+    _THandler handler,
   }) {
-    return listener != null ? listener(context, status: _reqState.status) : _defaultWidget;
+    return handler != null ? handler(context, status: _reqState.status) : _defaultWidget;
   }
 }
