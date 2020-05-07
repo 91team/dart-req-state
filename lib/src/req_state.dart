@@ -4,8 +4,8 @@ import 'package:meta/meta.dart';
 
 import 'req_state_statuses.dart';
 
-typedef ExecFn = Future<void> Function();
-typedef ExecFnWithMeta<Meta> = Future<dynamic> Function(void Function(Meta m));
+typedef _ExecFn = Future<void> Function();
+typedef _ExecFnWithMeta<Meta> = Future<dynamic> Function(void Function(Meta m));
 
 class ReqState {
   final _controller = StreamController<ReqStateStatus>.broadcast();
@@ -23,7 +23,7 @@ class ReqState {
     _switchToStatus(status: ReqStateStatusIDLE());
   }
 
-  Future<void> executeWithRethrowOnFail(ExecFn execFn) async {
+  Future<void> executeWithRethrowOnFail(_ExecFn execFn) async {
     try {
       switchStatusToPending();
       await execFn();
@@ -35,7 +35,7 @@ class ReqState {
   }
 
   Future<void> executeWithCallbackOnFail(
-    ExecFn execFn, {
+    _ExecFn execFn, {
     Function(Exception) onFailed,
   }) async {
     try {
@@ -52,7 +52,7 @@ class ReqState {
   }
 
   Future<void> executeWithMeta<TMeta>(
-    ExecFnWithMeta<TMeta> execFn, {
+    _ExecFnWithMeta<TMeta> execFn, {
     TMeta withInitialPendingMeta,
   }) async {
     try {
