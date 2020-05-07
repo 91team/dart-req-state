@@ -44,6 +44,9 @@ abstract class TestScreenControllerBase with Store {
           _metaSetIsSwitcherEnabled();
           return 'Ok';
         } catch (e) {
+          runInAction(() {
+            metaIsSwitcherEnabled = false;
+          });
           throw "¯\_(ツ)_/¯ ¯\_(ツ)_/¯";
         }
       },

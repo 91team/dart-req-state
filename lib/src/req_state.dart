@@ -104,7 +104,7 @@ class ReqState {
     _switchToStatus(status: ReqStateStatusFailed(meta: withMeta));
   }
 
-  void _switchToStatus<TMeta>({ReqStateStatus<TMeta> status}) {
+  void _switchToStatus({ReqStateStatus status}) {
     _currentStatus = status;
     _controller.add(_currentStatus);
   }
