@@ -8,20 +8,29 @@ class SimpleSectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return ReqStateCondition<ReqStateStatusIDLE>(
+    //   context.provide<TestScreenController>().simpleReqState,
+    //   onIf: _buildOnIfIdle,
+    //   onElse: _buildOnElseIdle,
+    // );
+
     return ReqStateSwitcher(
       context.provide<TestScreenController>().simpleReqState,
-      onIDLE: (context, {status}) => Text(
-        context.provide<TestScreenController>().simpleReqState.status.toString(),
-      ),
-      onPending: (context, {status}) {
-        return Text("${status.toString()}");
-      },
-      onFailed: (context, {status}) {
-        return Text("${status.toString()}");
-      },
-      onSucceeded: (context, {status}) {
-        return Text("${status.toString()}");
-      },
+      onIDLE: _buildOnIfIdle,
+      onPending: _buildOnElseIdle,
+      // onFailed: _buildOnElseIdle,
+      // onSucceeded: _buildOnElseIdle,
+      onOther: _buildOnElseIdle,
     );
+  }
+
+  Widget _buildOnIfIdle(BuildContext context, {ReqStateStatus status}) {
+    return Text(
+      context.provide<TestScreenController>().simpleReqState.status.toString(),
+    );
+  }
+
+  Widget _buildOnElseIdle(BuildContext context, {ReqStateStatus status}) {
+    return Text("${status.toString()}");
   }
 }
