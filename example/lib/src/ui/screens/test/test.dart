@@ -24,7 +24,9 @@ class TestScreen extends StatelessWidget {
                 Divider(),
                 Meta(),
                 Divider(),
-                Text('\n\n\n'),
+                SizedBox(
+                  height: 100,
+                ),
                 Divider(),
                 Simple(),
                 Divider(),

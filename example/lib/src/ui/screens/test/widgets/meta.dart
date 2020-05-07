@@ -9,6 +9,8 @@ class Meta extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.provide<TestScreenController>();
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -26,13 +28,9 @@ class Meta extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ReqStateSwitcher(
-              context.provide<TestScreenController>().metaReqState,
+              controller.metaReqState,
               onIDLE: (context, {status}) => Text(
-                context
-                    .provide<TestScreenController>()
-                    .metaReqState
-                    .status
-                    .toString(),
+                controller.metaReqState.status.toString(),
               ),
               onPending: (context, {status}) {
                 return Text(
@@ -51,11 +49,8 @@ class Meta extends StatelessWidget {
               },
             ),
             CupertinoSwitch(
-              value:
-                  context.provide<TestScreenController>().metaIsSwitcherEnabled,
-              onChanged: context
-                  .provide<TestScreenController>()
-                  .metaSetIsSwitcherEnabled,
+              value: context.provide<TestScreenController>().metaIsSwitcherEnabled,
+              onChanged: context.provide<TestScreenController>().metaSetIsSwitcherEnabled,
             ),
           ],
         ),
