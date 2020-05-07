@@ -18,8 +18,20 @@ class MetaSectionTitle extends StatelessWidget {
   }
 
   Widget _buildOnEvery(BuildContext context, {ReqStateStatus status}) {
+    if (status.checkMetaTypeIs<String>()) {
+      return Text(
+        "${status.toString()}::${status.retrieveMeta()}",
+      );
+    }
+
+    if (status.checkMetaTypeIs<num>()) {
+      return Text(
+        "${status.retrieveMeta()}%",
+      );
+    }
+
     return Text(
-      "${status.toString()}::${status.retrieveMeta()}",
+      "${status.toString()}",
     );
   }
 }
