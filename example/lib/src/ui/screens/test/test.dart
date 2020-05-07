@@ -1,10 +1,11 @@
 import 'package:dart_req_state_example/src/ui/screens/test/controller/controller.dart';
-import 'package:dart_req_state_example/src/ui/screens/test/widgets/meta.dart';
-import 'package:dart_req_state_example/src/ui/screens/test/widgets/simple.dart';
 import 'package:dart_req_state_example/src/ui/widgets/screen_wrapper/screen_wrapper.dart';
 import 'package:flutter/material.dart' hide Switch;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+
+import 'widgets/sections/meta/meta.dart';
+import 'widgets/sections/simple/simple.dart';
 
 class TestScreen extends StatelessWidget {
   final Animation<double> animationAppearance;
